@@ -1,0 +1,68 @@
+---
+- block:
+  - name: create /etc/pki/ovirt-engine directory
+    file:
+      path: /etc/pki/ovirt-engine
+      state: directory
+      mode: 0755
+
+  - name: copy rhv_ca.pem to /etc/pki/ovirt-engine/
+    file:
+      src: rhv_ca.pem
+      dest: /etc/pki/ovirt-engine
+
+  - name: load engine_password from secret vault file
+    include_vars: "secrets.yml"
+    no_log: true
+
+  - name: Login to rhv
+    ovirt_auth:
+      url: "{{ engine_url }}"
+      username: "{{ engine_user }}"
+      password: "{{ engine_password }}"
+      ca_file: "{{ engine_cafile | default(omit) }}"
+      insecure: "{{ engine_insecure | default(true) }}"
+    when: ovirt_auth is undefined
+    register: loggedin
+
+  - name: deploying a RHV VM with static IP
+    ovirt_vms:
+      auth: "{{ ovirt_auth }}" 
+      name: "{{ vm_name }}"
+      template: "{{ img_name }}"
+      cluster: "{{ cluster }}"
+      cloud_init:
+        user_name: root
+        root_password: 'eddiechen'
+        custom_script: |
+          runcmd:
+          - /usr/bin/hostnamectl set-hostname {{ vm_name }}.chen.com
+      cloud_init_nics:
+        - nic_name: eth0
+          nic_boot_protocol: static
+          nic_ip_address: 192.168.1.{{ ip_addr }}
+          nic_netmask: 255.255.255.0
+          nic_gateway: 192.168.1.1
+          nic_on_boot: true
+    when: ip_addr is defined
+
+  - name: deploying a RHV VM with dhcp IP
+    ovirt_vms:
+      auth: "{{ ovirt_auth }}"
+      name: "{{ vm_name }}"
+      template: "{{ img_name }}"
+      cluster: "{{ cluster }}"
+      cloud_init:
+        user_name: root
+        root_password: 'eddiechen'
+        custom_script: |
+          runcmd:
+          - /usr/bin/hostnamectl set-hostname {{ vm_name }}.chen.com
+    when: ip_addr is not defined
+
+  always:
+    - name: Logout from rhv
+      ovirt_auth:
+        state: absent
+        ovirt_auth: "{{ ovirt_auth }}"
+      when: not loggedin.skipped | default(false)

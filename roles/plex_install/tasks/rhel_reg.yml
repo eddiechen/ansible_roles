@@ -1,0 +1,20 @@
+---
+# registering the server with Red Hat and update VM
+
+- name: remove old content host name
+  file:
+    state: absent
+    path: /etc/rhsm/facts/katello.facts
+
+- name: registering system w/ subscription manager
+  redhat_subscription:
+    state: present
+    org_id: "{{ org_id }}"
+    activationkey: "{{ activationkey }}"
+
+- name: enable repo and update system
+  yum:
+    name: "*"
+    disablerepo: "*"
+    enablerepo: rhel-7-server-rpms
+    state: latest

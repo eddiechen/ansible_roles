@@ -1,0 +1,8 @@
+---
+sat6ip: 192.168.1.150
+sat6server: sat6
+fqdn: sat6.chen.com
+activationkey: rhel7_dev
+org_id: Default_Organization
+domain: .chen.com
+ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC7E6CqlnXvcR7oWtXX7LYYrtpjBeATdsV+FvVUe512F373I+mcO97TCeP6S5jyFiCKsu8huunUM1zEU78mT6yckdZL+ATJLZaN+s/pZgzK1kpvlcelSYItYaGdOKKJvZhs2b7AaXyTWdIKlFW9L5/1V5oPYt+SU5G+skwZPFoCDDtBGkybIdsAmpdRM1LXUNZpc5A8EJNh+ddWHef6kNt8lYVmSKx/vjekpwigSuhI6DcHXCWX21cGyD6M2hwQvximvjFWLA32vFO/04u0kiHtsA8DZJc5M8j1z10pH99I291mHhlkggcYGb/dKPGT1IOABKDPbFLtupJZ70B2VIHn foreman-proxy@sat6.chen.com

@@ -1,0 +1,42 @@
+---
+#system config for Plex server
+
+- name: disabling selinux
+  selinux:
+    state: disabled
+
+- name: disabling firewall
+  systemd:
+    name: firewalld.service
+    enabled: no
+    state: stopped
+
+- name: enabling chrony
+  systemd:
+    name: chronyd.service
+    enabled: yes
+    state: started
+
+- name: enabling EPEL repo
+  yum:
+    name: https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    state: present
+
+- name: disabling ipv6
+  sysctl:
+    name: net.ipv6.conf.all.disable_ipv6
+    value: 1
+    state: absent
+
+- name: disabling wifi radio
+  command: /usr/bin/nmcli radio wifi off
+
+- name: install misc_pkgs
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - ntfs-3g
+    - http://li.nux.ro/download/nux/dextop/el7/x86_64/exfat-utils-1.2.7-1.el7.nux.x86_64.rpm
+    - http://li.nux.ro/download/nux/dextop/el7/x86_64/fuse-exfat-1.2.7-1.el7.nux.x86_64.rpm
+  ignore_errors: True

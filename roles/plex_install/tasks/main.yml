@@ -1,0 +1,33 @@
+---
+# tasks file for plex_install
+- name: fail playbook if plex.rpm is undefined
+  fail:
+    msg: "plexrpm variable is undefined"
+  when: plexrpm is undefined
+
+- import_tasks: rhel_reg.yml
+- import_tasks: sysconfig.yml
+
+- name: installing plexmedia server rpm
+  yum:
+    name: "{{ plexrpm }}"
+    state: present
+
+- name: enabling and starting plex service
+  service:
+    name: plexmediaserver.service
+    state: started
+    enabled: yes
+
+- name: create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: echen
+    group: echen
+  with_items:
+    - /plex_media
+    - /plex_media/tv_shows
+    - /plex_media/movies
+    - /plex_media/misc

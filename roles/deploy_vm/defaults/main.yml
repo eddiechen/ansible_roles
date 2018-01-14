@@ -1,0 +1,7 @@
+---
+engine_url: https://rhevm.chen.com/ovirt-engine/api
+engine_user: admin@internal
+engine_cafile: /etc/pki/ovirt-engine/rhv_ca.pem
+datacenter: Default
+cluster: Default
+img_name: rhel7u4-base

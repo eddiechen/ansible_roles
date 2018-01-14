@@ -1,0 +1,67 @@
+---
+# tasks file for sat6reg
+
+- name: remove old content host name
+  file:
+    state: absent
+    path: /etc/rhsm/facts/katello.facts
+
+- name: set sat6.chen.com ip in /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ sat6ip }} {{ fqdn }} {{ sat6server }}"
+
+- name: installing Sat6 certificate
+  yum:
+    name: http://sat6.chen.com/pub/katello-ca-consumer-latest.noarch.rpm
+    state: present
+    ignore_errors: True
+
+- name: registering system w/ subscription manager
+  redhat_subscription:
+    state: present
+    org_id: "{{ org_id }}"
+    activationkey: "{{ activationkey }}"
+
+- name: yum install packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - katello-agent
+    - chrony
+#    - puppet
+  notify: enable and start services
+- name: force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
+
+#- name: set puppet config file
+#  lineinfile:
+#    dest: /etc/puppet/puppet.conf
+#    line: "server={{ fqdn }}"
+
+#- name: run puppet config manually
+#  command: /usr/bin/puppet agent -t --onetime
+#  ignore_errors: True
+
+- name: disable firewall service
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: modify motd
+  lineinfile:
+    dest: /etc/motd
+    line: "you have been ansibled by Eddie!"
+
+- name: copy over satellite ssh key
+  lineinfile:
+    dest: /root/.ssh/authorized_keys
+    line: "{{ ssh_key }}"
+
+- name: yum update all
+  yum:
+    name: "*"
+    state: latest
+  notify: reboot server
