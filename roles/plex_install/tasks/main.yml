@@ -23,11 +23,18 @@
   file:
     path: "{{ item }}"
     state: directory
-    mode: 0755
-    owner: echen
-    group: echen
+    mode: 0777
+    owner: plex
+    group: plex
   with_items:
     - /plex_media
     - /plex_media/tv_shows
     - /plex_media/movies
     - /plex_media/misc
+
+- name: setup cron to enforce plex ownership
+  cron:
+    minute: 0
+    hour: */4
+    user: root
+    job: "/usr/bin/chown plex:plex -R /plex_media/"
