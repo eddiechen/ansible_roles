@@ -12,9 +12,11 @@
     org_id: "{{ org_id }}"
     activationkey: "{{ activationkey }}"
 
-- name: enable repo and update system
+- name: enabling Red Hat repos
+  command: /usr/sbin/subscription-manager repos --disable="*" --enable=rhel-7-server-rpms
+  ignore_errors: True
+
+- name: update server
   yum:
     name: "*"
-    disablerepo: "*"
-    enablerepo: rhel-7-server-rpms
     state: latest
