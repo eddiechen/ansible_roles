@@ -1,7 +1,7 @@
 ---
 #execute 'ansible-playbook wait_for_it.yml -e "vm_name=<hostname>"'
 
-- hosts: "{{ vm_name }}{{ domain }}"
+- hosts: "{{ vm_name }}"
   remote_user: root
   roles:
   - wait_for_it
