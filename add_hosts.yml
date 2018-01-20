@@ -1,0 +1,9 @@
+---
+# add hosts to inventory during an ansible run 'ansible-playbook add_hosts.yml -e "host_file=/tmp/hosts"'
+
+- name: add hosts
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - add_hosts
