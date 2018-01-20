@@ -8,7 +8,7 @@
   roles:
     - add_hosts
 
-- hosts: "{{ vm_name }}{{ domain }}"
+- hosts: "{{ vm_name }}"
   remote_user: root
   roles:
   - sat6reg

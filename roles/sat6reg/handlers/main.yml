@@ -10,7 +10,7 @@
     - chronyd
 #    - puppet
 
-- name: reboot host
+- name: reboot server
   shell: sleep 10 && /sbin/shutdown -r now
   async: 300
   poll: 0
