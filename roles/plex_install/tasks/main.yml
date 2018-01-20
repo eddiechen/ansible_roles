@@ -35,6 +35,6 @@
 - name: setup cron to enforce plex ownership
   cron:
     minute: 0
-    hour: */4
+    hour: "*/4"
     user: root
     job: "/usr/bin/chown plex:plex -R /plex_media/"
