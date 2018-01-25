@@ -1,0 +1,6 @@
+---
+- name: Installing RH insights
+  hosts: all
+  roles:
+      - { role: rh_insights, when: ansible_os_family == 'RedHat' }
+

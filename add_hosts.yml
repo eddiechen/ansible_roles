@@ -7,3 +7,9 @@
   gather_facts: false
   roles:
     - add_hosts
+
+- hosts: guests
+  remote_user: root
+  gather_facts: no
+  roles:
+    - hostname
