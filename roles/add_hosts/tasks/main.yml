@@ -1,6 +1,6 @@
 ---
 # tasks file for add_hosts
 - add_host:
-    name: "{{ host_file }}"
+    name: "{{ vm_name }}"
     groups: "guests"
 #  with_lines: cat "{{ host_file }}"
