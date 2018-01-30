@@ -1,0 +1,24 @@
+---
+# build dhcp VM 'ansible-playbook deploy_vm.yml -e "vm_name=test3" --ask-vault-pass' 
+# build static IP VM 192.168.1.99 'ansible-playbook deploy_vm.yml -e "vm_name=test2 ip_addr=99" --ask-vault-pass'
+
+- name: RHV VM deployment
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - deploy_vm
+
+# add hosts to inventory during an ansible run 'ansible-playbook add_hosts.yml -e "vm_name=test2"'
+
+- name: add hosts
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - add_hosts
+
+- hosts: "{{ vm_name }}"
+  remote_user: root
+  roles:
+  - sat6reg
