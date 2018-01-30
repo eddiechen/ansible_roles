@@ -5,10 +5,12 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  no_log: True
   roles:
     - add_hosts
 
 - hosts: "{{ vm_name }}"
   remote_user: root
+  no_log: True
   roles:
   - sat6reg
