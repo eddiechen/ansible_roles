@@ -11,17 +11,8 @@
   ignore_errors: True
 
 - name: Delete file wildcard
-  find:
-    paths: /tmp
-    patterns: "^plexmediaserver*.rpm"
-    use:regex: true
-  register: wildcard_files_to_delete
-
-- name: Ansible remove file wildcard
-  file:
-    path: "{{ item.path }}"
-    state: absent
-  with_items: "{{ wildcard_files_to_delete.files }}"
+  shell: /usr/bin/rm -rf /tmp/plexmediaserver*.rpm
+  ignore_errors: True
 
 - name: upgrade all packages
   yum:
