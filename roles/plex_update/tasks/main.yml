@@ -1,18 +1,24 @@
 ---
 # tasks file for plex_update
 
+- name: fail playbook if plex.rpm is undefined
+  fail:
+    msg: "plexrpm variable is undefined"
+  when: plexrpm is undefined
+
 - name: stop plexmedia service
   service:
     name: plexmediaserver
     state: stopped
 
 - name: update plexrpm
-  shell: /usr/bin/yum localupdate -y /tmp/plexmediaserver*.rpm
+  shell: /usr/bin/yum localupdate -y /tmp/"{{ plexrpm }}"
   ignore_errors: True
 
-- name: Delete file wildcard
-  shell: /usr/bin/rm -rf /tmp/plexmediaserver*.rpm
-  ignore_errors: True
+- name: Delete plexrpm file
+  file:
+    state: absent
+    path: /tmp/"{{ plexrpm }}"
 
 - name: upgrade all packages
   yum:
