@@ -7,7 +7,7 @@
     state: stopped
 
 - name: update plexrpm
-  shell: /usr/bin/yum localupdate /tmp/plexmediaserver*.rpm
+  shell: /usr/bin/yum localupdate -y /tmp/plexmediaserver*.rpm
   ignore_errors: True
 
 - name: Delete file wildcard
