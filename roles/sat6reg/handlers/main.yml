@@ -8,6 +8,7 @@
   with_items:
     - goferd
     - chronyd
+    - ovirt-guest-agent
 #    - puppet
 
 - name: reboot server

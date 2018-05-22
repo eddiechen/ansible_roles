@@ -23,6 +23,9 @@
     org_id: "{{ org_id }}"
     activationkey: "{{ activationkey }}"
 
+- name: enabling repos
+  shell: /usr/sbin/subscription-manager repos --enable=rhel-7-server-rh-common-rpms/x86_64 --enable=rhel-7-server-satellite-tools-6.2-rpms
+
 - name: yum install packages
   yum:
     name: "{{ item }}"
@@ -30,6 +33,7 @@
   with_items:
     - katello-agent
     - chrony
+    - ovirt-guest-agent-common
 #    - puppet
   notify: enable and start services
 - name: force all notified handlers to run at this point, not waiting for normal sync points
@@ -60,8 +64,8 @@
     dest: /root/.ssh/authorized_keys
     line: "{{ ssh_key }}"
 
-- name: yum update all
-  yum:
-    name: "*"
-    state: latest
-  notify: reboot server
+#- name: yum update all
+#  yum:
+#    name: "*"
+#    state: latest
+#  notify: reboot server
