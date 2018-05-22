@@ -55,6 +55,10 @@
     state: stopped
     enabled: no
 
+- name: disable SELinux
+  selinux:
+    state: disabled
+
 - name: modify motd
   lineinfile:
     dest: /etc/motd
