@@ -25,7 +25,7 @@
   shell: /usr/sbin/subscription-manager register --org="{{ org_id }}" --activationkey="{{ activationkey }}"
 
 - name: enabling repos
-  shell: /usr/sbin/subscription-manager repos --enable=rhel-7-server-rh-common-rpms/x86_64 --enable=rhel-7-server-satellite-tools-6.3-rpms
+  shell: /usr/sbin/subscription-manager repos --enable=rhel-7-server-rh-common-rpms --enable=rhel-7-server-satellite-tools-6.3-rpms
 
 - name: yum install packages
   yum:
