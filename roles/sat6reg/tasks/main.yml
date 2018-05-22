@@ -23,9 +23,11 @@
 #    org_id: "{{ org_id }}"
 #    activationkey: "{{ activationkey }}"
   shell: /usr/sbin/subscription-manager register --org="{{ org_id }}" --activationkey="{{ activationkey }}"
+  ignore_errors: True
 
 - name: enabling repos
   shell: /usr/sbin/subscription-manager repos --enable=rhel-7-server-rh-common-rpms --enable=rhel-7-server-satellite-tools-6.3-rpms
+  ignore_errors: True
 
 - name: yum install packages
   yum:
@@ -35,7 +37,7 @@
     - katello-agent
     - chrony
     - ovirt-guest-agent-common
-    - insights-client
+#    - insights-client
 #    - puppet
   notify: enable and start services
 - name: force all notified handlers to run at this point, not waiting for normal sync points
@@ -70,8 +72,8 @@
     dest: /root/.ssh/authorized_keys
     line: "{{ ssh_key }}"
 
-- name: register Red Hat insights
-  shell: /usr/bin/insights-client --register
+#- name: register Red Hat insights
+#  shell: /usr/bin/insights-client --register
 
 #- name: yum update all
 #  yum:
