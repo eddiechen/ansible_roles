@@ -1,9 +1,8 @@
 ---
-#execute 'ansible-playbook plex_rsync.yml'
+#execute 'ansible-playbook plex_update.yml -e "vm_name=<hostname> plexrpm=<plex>.rpm"'
 
-- hosts: localhost
-  gather_facts: true
+- hosts: "{{ vm_name }}"
   remote_user: root
-
+  
   roles:
-    - plex_rsync
+  - plex_update
