@@ -1,5 +1,8 @@
 ---
 # tasks file for plex-maint
 
+- name: Prevent run without tags
+  fail: msg="You must run this playbook with tags!"
+
 - import_tasks: plex_chmod.yml
 - import_tasks: plex_rsync.yml
