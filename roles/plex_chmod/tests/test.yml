@@ -1,6 +1,0 @@
----
-- hosts: "{{ vm_name }}"
-  remote_user: root
-
-  roles:
-    - plex_chmod
