@@ -5,4 +5,10 @@
   fail: msg="You must run this playbook with tags!"
 
 - import_tasks: plex_chmod.yml
+  tags: chmod
+
 - import_tasks: plex_rsync.yml
+  tags: rsync
+
+- import_tasks: plex_update.yml
+  tags: update

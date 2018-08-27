@@ -5,8 +5,6 @@
   fail:
     msg: "{{ myvol }} must be a mount point"
   when: myvol is not is_mount
-  tags:
-    - rsync
 
 - name: "rsync: volume is presented"
   synchronize:
@@ -15,5 +13,3 @@
     archive: yes
     delete: yes
   when: myvol is is_mount
-  tags:
-    - rsync
