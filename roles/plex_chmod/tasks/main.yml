@@ -6,6 +6,11 @@
     path: "{{ plex_dir }}"
   register: st
 
+- name: fail if directory does not exist or not a directory
+  fail:
+    msg: "{{ plex_dir }} is a bad directory"
+  when: st.stat.exists == False or st.stat.isdir == False
+
 - name: change file ownership and mode
   file:
     path: "{{ plex_dir }}"
