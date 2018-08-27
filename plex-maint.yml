@@ -1,0 +1,9 @@
+---
+#exampe: ansible-playbook plex-maint.yml --tags "chmod,rsync"
+
+- hosts: localhost
+  gather_facts: true
+  remote_user: root
+
+  roles:
+    - plex-maint
