@@ -1,7 +1,7 @@
 ---
-#execute 'ansible-playbook plex_rsync.yml -e "vm_name=<hostname>"'
+#execute 'ansible-playbook plex_rsync.yml'
 
-- hosts: "{{ vm_name }}"
+- hosts: localhost
   gather_facts: true
   remote_user: root
 
