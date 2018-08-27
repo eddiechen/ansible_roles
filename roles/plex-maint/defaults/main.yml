@@ -1,0 +1,6 @@
+---
+# defaults file for plex-maint
+plex_dir: /plex_media
+src: /plex_media/
+dest: /run/media/echen/bfb12c65-1eab-4028-bb6b-a1e54a9a2171/plex_media/
+myvol: /run/media/echen/bfb12c65-1eab-4028-bb6b-a1e54a9a2171
