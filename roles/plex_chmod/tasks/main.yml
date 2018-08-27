@@ -1,0 +1,16 @@
+---
+# tasks file for plex_chmod
+
+- name: status of the directory
+  stat:
+    path: "{{ plex_dir }}"
+  register: st
+
+- name: change file ownership and mode
+  file:
+    path: "{{ plex_dir }}"
+    owner: plex
+    group: plex
+    mode: 0775
+    recurse: yes
+  when: st.stat.exists and st.stat.isdir
