@@ -7,7 +7,6 @@
   register: st
   tags:
     - chmod
-    - all
 
 - name: "chmod: fail if directory does not exist or not a directory"
   fail:
@@ -15,7 +14,6 @@
   when: st.stat.exists == False or st.stat.isdir == False
   tags:
     - chmod
-    - all
 
 - name: "chmod: change file ownership and mode"
   file:
@@ -27,4 +25,3 @@
   when: st.stat.exists and st.stat.isdir
   tags:
     - chmod
-    - all

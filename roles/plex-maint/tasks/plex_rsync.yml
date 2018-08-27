@@ -7,7 +7,6 @@
   when: myvol is not is_mount
   tags:
     - rsync
-    - all
 
 - name: "rsync: volume is presented"
   synchronize:
@@ -18,4 +17,3 @@
   when: myvol is is_mount
   tags:
     - rsync
-    - all
