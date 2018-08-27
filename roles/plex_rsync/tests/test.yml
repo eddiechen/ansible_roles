@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- hosts: "{{ vm_name }}"
+  gather_facts: true
   remote_user: root
+
   roles:
     - plex_rsync
