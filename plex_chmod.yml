@@ -1,8 +1,0 @@
----
-#execute 'ansible-playbook plex_chmod.yml'
-
-- hosts: localhost
-  remote_user: root
-
-  roles:
-    - plex_chmod

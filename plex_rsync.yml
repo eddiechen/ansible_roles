@@ -1,9 +1,0 @@
----
-#execute 'ansible-playbook plex_rsync.yml'
-
-- hosts: localhost
-  gather_facts: true
-  remote_user: root
-
-  roles:
-    - plex_rsync
