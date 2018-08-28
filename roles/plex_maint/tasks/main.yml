@@ -1,5 +1,5 @@
 ---
-# tasks file for plex-maint
+# tasks file for plex_maint
 
 - name: Prevent run without tags
   fail: msg="You must run this playbook with tags!"
