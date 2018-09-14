@@ -1,7 +1,0 @@
----
-#execute 'ansible-playbook plex_update.yml -e "vm_name=<hostname> plexrpm=<plex>.rpm"'
-
-- hosts: "{{ vm_name }}"
-  remote_user: root
-  roles:
-  - plex_update
