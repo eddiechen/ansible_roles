@@ -4,7 +4,6 @@
     path: "{{ myvol }}"
   register: plex_vol
 
-
 - name: "rsync: check and make sure plex backup volume is mounted"
   fail:
     msg: "{{ myvol }} does not exist"
@@ -16,4 +15,5 @@
     dest: "{{ dest }}"
     archive: yes
     delete: yes
+  delegate_to: "{{ inventory_hostname }}"
   when: plex_vol.stat.isdir is defined
