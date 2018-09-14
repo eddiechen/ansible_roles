@@ -2,7 +2,6 @@
 #exampe: ansible-playbook plex_maint.yml --tags "chmod or rsync or update"
 
 - hosts: all
-  gather_facts: true
 
   roles:
     - plex_maint
