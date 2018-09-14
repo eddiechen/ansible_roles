@@ -4,7 +4,7 @@
 - name: "rsync: check and make sure plex backup volume is mounted"
   fail:
     msg: "{{ myvol }} must be a mount point"
-  when: myvol is not is_mount
+  when: myvol is not mount
 
 - name: "rsync: volume is presented"
   synchronize:
@@ -12,4 +12,4 @@
     dest: "{{ dest }}"
     archive: yes
     delete: yes
-  when: myvol is is_mount
+  when: myvol is mount
