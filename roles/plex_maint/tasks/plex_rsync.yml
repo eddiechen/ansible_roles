@@ -8,7 +8,7 @@
 - name: "rsync: check and make sure plex backup volume is mounted"
   fail:
     msg: "{{ myvol }} does not exist"
-  when: plex_vol.stat.isdir is not undefined
+  when: plex_vol.stat.isdir is not defined
 
 - name: "rsync: volume is presented"
   synchronize:
@@ -16,4 +16,4 @@
     dest: "{{ dest }}"
     archive: yes
     delete: yes
-  when: myvol is mount
+  when: plex_vol.stat.isdir is defined
