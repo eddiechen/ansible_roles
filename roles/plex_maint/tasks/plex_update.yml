@@ -33,16 +33,20 @@
 
 - name: "update: Rebooting ..."
   command: shutdown -r now "Reboot required for updated kernel"
-  async: 0
-  poll: 0
-  sudo: true
+#  async: 0
+#  poll: 0
+#  sudo: true
   ignore_errors: true
   when: reboot_hint.stdout.find("reboot") != -1
   register: rebooting
 
-- name: "update: Wait for thing to reboot..."
-  pause: seconds=100
-  when: rebooting|changed
+#- name: "update: Wait for thing to reboot..."
+#  pause: seconds=100
+#  when: rebooting|changed
+
+- name: "exit playbook, system is rebooting"
+  fail: "system is rebooting"
+  when: reboot_hint.stdout.find("reboot") != -1
 
 - name: "update: Start service plexmediaserver, if not running"
   service:
