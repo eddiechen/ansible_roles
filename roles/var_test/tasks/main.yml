@@ -2,38 +2,38 @@
 # tasks file for var_test
 - name: Checking for company variable
   set_fact:
-    company_1: "USDI"
-  when: company == "US Dog Insurance"
+    company_1: "USLI"
+  when: UD0005ABLY.company == "US Life Insurance"
 
 - name: checking for location variable
   set_fact:
-    location_1: "RVA"
-  when: location == "Richmond"
+    location_1: "BLY"
+  when: UD0005ABLY.location == "Blythewood"
 
 - name: checking for environment variable
   set_fact:
     env_1: "DEV"
-  when: env == "Development"
+  when: UD0005ABLY.env == "Development"
 
 - name: checking for OS 7 version
   set_fact:
     os_vers1: "7"
-  when: os_vers >= 7.0
+  when: UD0005ABLY.os_vers >= 7.0
 
 - name: checking for OS 6 version
   set_fact:
     os_vers1: "6"
-  when: os_vers < 7.0
+  when: UD0005ABLY.os_vers < 7.0
 
 - name: checking to see if this is a virtual machine
   set_fact:
     is_virt_1: "VM"
-  when: is_virt == "TRUE"
+  when: UD0005ABLY.is_virtual == "TRUE"
 
 - name: checking to see if this is a physical machine
   set_fact:
     is_virt_1: "Physical"
-  when: is_virt == "FALSE"
+  when: UD0005ABLY.is_virtual == "FALSE"
 
 - name: stitch them together
   set_fact:
