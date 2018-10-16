@@ -1,0 +1,7 @@
+---
+# defaults file for var_test
+company: "US Dog Insurance"
+location: Richmond
+env: Development
+os_vers: 7.5
+is_virt: "TRUE"

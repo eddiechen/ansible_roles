@@ -1,0 +1,44 @@
+---
+# tasks file for var_test
+- name: Checking for company variable
+  set_fact:
+    company_1: "USDI"
+  when: company == "US Dog Insurance"
+
+- name: checking for location variable
+  set_fact:
+    location_1: "RVA"
+  when: location == "Richmond"
+
+- name: checking for environment variable
+  set_fact:
+    env_1: "DEV"
+  when: env == "Development"
+
+- name: checking for OS 7 version
+  set_fact:
+    os_vers1: "7"
+  when: os_vers >= 7.0
+
+- name: checking for OS 6 version
+  set_fact:
+    os_vers1: "6"
+  when: os_vers < 7.0
+
+- name: checking to see if this is a virtual machine
+  set_fact:
+    is_virt_1: "VM"
+  when: is_virt == "TRUE"
+
+- name: checking to see if this is a physical machine
+  set_fact:
+    is_virt_1: "Physical"
+  when: is_virt == "FALSE"
+
+- name: stitch them together
+  set_fact:
+    final_var: "{{ company_1 }}-{{ location_1 }}-{{ env_1 }}-RHELv{{ os_vers1 }}-{{ is_virt_1 }}"
+
+- name: output environment variable
+  debug:
+    msg: "{{ final_var }}"
