@@ -45,7 +45,8 @@
 #  when: rebooting|changed
 
 - name: "exit playbook, system is rebooting"
-  fail: "system is rebooting"
+  fail:
+    msg: "system is rebooting"
   when: reboot_hint.stdout.find("reboot") != -1
 
 - name: "update: Start service plexmediaserver, if not running"
