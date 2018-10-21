@@ -1,8 +1,10 @@
 ---
 # tasks file for plex_maint
 
-- name: Prevent run without tags
-  fail: msg="You must run this playbook with tags!"
+#- name: Prevent run without tags
+#  fail:
+#    msg: "You must run this playbook with tags!"
+#  when: 
 
 - import_tasks: plex_chmod.yml
   tags: chmod
