@@ -24,8 +24,8 @@
     state: started
     enabled: yes
   with_items:
-    - pcp
-    - pcp-gui
+    - pmcd
+    - pmlogger
 
 - name: Enable RHEL 7 optional repository
   rhsm_repository:
