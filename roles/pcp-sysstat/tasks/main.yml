@@ -1,0 +1,72 @@
+---
+# tasks file for pcp-sysstat
+- name: installing sysstat
+  yum:
+    name: sysstat
+    state: present
+
+- name: starting & enabling sysstat
+  service:
+    name: sysstat
+    state: started
+    enabled: yes
+
+- name: installing pcp
+  yum:
+    name:
+      - pcp
+      - pcp-gui
+    state: present
+
+- name: starting & enabling pcp
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - pcp
+    - pcp-gui
+
+- name: Enable RHEL 7 optional repository
+  rhsm_repository:
+    name: rhel-7-server-optional-rpms
+
+- name: installing gafana/vector
+  yum:
+    name:
+      - pcp-webapi
+      - pcp-webapp-vector
+      - pcp-webapp-grafana
+    state: present
+
+- name: starting & enabling vector/gafana
+  service:
+    name: "{{ item }}"
+    state: started
+    enabled: yes
+  with_items:
+    - pmcd
+    - pmwebd
+
+- name: enabling port 44323 for pmwebd
+  firewalld:
+    port: 44323/tcp
+    permanent: yes
+    state: enabled
+
+- name: installing cockpit
+  yum:
+    name: cockpit
+    state: present
+
+- name: starting & enabling cockpit
+  service:
+    name: cockpit
+    state: started
+    enabled: yes
+
+- name: enabling port 9090 for cockpit
+  firewalld:
+    port: 9090/tcp
+    permanent: yes
+    state: enabled
