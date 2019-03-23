@@ -12,11 +12,11 @@
     state: stopped
 
 - name: "update: update plexrpm"
-  #shell: /usr/bin/yum update -y /tmp/"{{ plexrpm }}"
-  #ignore_errors: True
-  yum:
-    name: /tmp/"{{ plexrpm }}"
-    state: latest
+  shell: /usr/bin/yum update -y /tmp/"{{ plexrpm }}"
+  ignore_errors: True
+  #yum:
+  #  name: /tmp/"{{ plexrpm }}"
+  #  state: latest
 
 - name: "update: Delete plexrpm file"
   file:
