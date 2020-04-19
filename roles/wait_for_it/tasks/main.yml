@@ -8,4 +8,4 @@
 
 - name: sleep for {{ seconds }} seconds and continue with play
   wait_for:
-    timeout: {{ seconds }}
+    timeout: "{{ seconds }}"
