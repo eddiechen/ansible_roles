@@ -1,7 +1,11 @@
 ---
 # tasks file for wait_for_it
 
-  - name: wait for system to become reachable
-    wait_for_connection:
-      timeout: 180
-      delay: 120
+#  - name: wait for system to become reachable
+#    wait_for_connection:
+#      timeout: 180
+#      delay: 120
+
+- name: sleep for 300 seconds and continue with play
+  wait_for:
+    timeout: 300
