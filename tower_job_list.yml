@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+
+  tasks:
+  - name: List running jobs for the testing.yml playbook
+  tower_job_list:
+    status: running
+    tower_config_file: "~/tower_cli.cfg"
+  register: running_jobs
+
+  - name: display results
+    debug:
+      var: running_jobs
