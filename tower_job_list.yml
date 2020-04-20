@@ -2,12 +2,22 @@
 - hosts: localhost
 
   tasks:
-  - name: List running jobs for the testing.yml playbook
+  - name: List running jobs
     tower_job_list:
       status: running
-      tower_config_file: "~/.tower_cli.cfg"
+      tower_host: tower.eddiechen.net
+      tower_password: redhat
+      tower_username: admin
     register: running_jobs
 
+  - name: determine if there are any running jobs
+    meta: end_play
+    when: running_jobs.count == 0
+
   - name: display results
+    vars:
+      count: "{{ running_jobs.count - 1 }}"
     debug:
-      var: running_jobs
+      var: running_jobs.results[ {{ item }} ].id
+    when: running_jobs.results[ {{ item }} ].elapsed|int > 300
+    with_sequence: start=0 end="{{ count }}"
