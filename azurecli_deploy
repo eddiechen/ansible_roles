@@ -3,7 +3,7 @@
 
   tasks:
   - name: deploy a windows VM to Azure
-    command: /usr/bin/az vm create --resource-group "test" --name {{ vm_name }} --image "Win2019Datacenter" --admin-username "demouser" --admin-password "Redhat123456" --vnet-name test-vnet --subnet default --size Standard_B1s
+    command: /usr/bin/az vm create --resource-group "test" --name {{ vm_name }} --image "Win2019Datacenter" --admin-username "demouser" --admin-password "Redhat123456" --vnet-name test-vnet --subnet default --size Standard_DS1_v2
     register: result
 
   - name: output results
