@@ -3,10 +3,12 @@
 - name: Create VM
   azure_rm_virtualmachine:
     resource_group: test
-    name: "{{ vm_name }}"
+    #name: "{{ vm_name }}"
+    name: wintest2
     vm_size: Standard_B1s
     admin_username: azureuser
-    admin_password: "{{ password }}"
+    #admin_password: "{{ password }}"
+    admin_password: Redhat123456
     network_interfaces: test-vnet
     os_type: Windows
     image:
