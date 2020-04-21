@@ -6,4 +6,4 @@
     command: /usr/bin/az vm stop --resource-group "test" --name {{ vm_name }}
 
   - name: Delete the VM from Azure
-    command: /usr/bin/az vm delete --resource-group "test" --name {{ vm_name }}
+    command: /usr/bin/az vm delete --resource-group "test" --name {{ vm_name }} --yes
