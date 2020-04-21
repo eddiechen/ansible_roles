@@ -1,2 +1,6 @@
 ---
 # defaults file for azure_deploy
+subscription: 44d046cf-5a2b-4a9e-8524-890a35cf075f
+client: 7e3ebf19-53e4-4fab-8113-e283cd9d3964
+secret: g_?ql6qRpVxV/3f_rvCw65@pJ]7:VanR
+tenant: 3faa821d-bb43-410d-9db6-028196cbc598
