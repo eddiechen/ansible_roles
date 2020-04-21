@@ -1,0 +1,11 @@
+- hosts: localhost
+  remote_user: root
+
+  tasks:
+  - name: deploy a windows VM to Azure
+    command: /usr/bin/az vm create --resource-group "test" --name {{ vm_name }} --image "Win2019Datacenter" --admin-username "demouser" --admin-password "Redhat123456" --vnet-name test-vnet --subnet default --size Standard_B1s
+    register: result
+
+  - name: output results
+    debug:
+      var: result
