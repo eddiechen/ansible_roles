@@ -4,8 +4,8 @@
   azure_rm_virtualmachine:
     resource_group: test
     name: "{{ vm_name }}"
-    vm_size: Standard_B1s
-    admin_username: azureuser
+    vm_size: Standard_DS1_v2
+    admin_username: demouser
     admin_password: Redhat123456
     network_interfaces: test-vnet
     os_type: Windows
