@@ -1,7 +1,7 @@
 ---
 - name: Remove webpage index.html file
   file:
-    path: /var/www/index.html
+    path: /var/www/html/index.html
     state: absent
 
 - name: disabling apache service

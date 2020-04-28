@@ -13,7 +13,7 @@
 - name: Copying index test page
   template:
     src: "templates/index.html.j2"
-    dest: "/var/www/index.html"
+    dest: "/var/www/html/index.html"
 
 - name: enabling apache service
   service:
