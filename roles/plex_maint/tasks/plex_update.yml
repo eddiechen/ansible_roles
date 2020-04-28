@@ -1,27 +1,10 @@
 ---
 # tasks file for plex_update
 
-#- name: "update: fail playbook if plex.rpm is undefined"
-#  fail:
-#    msg: "plexrpm variable is undefined"
-#  when: plexrpm is undefined
-
 - name: "update: stop plexmedia service"
   service:
     name: plexmediaserver
     state: stopped
-
-#- name: "update: update plexrpm"
-#  shell: /usr/bin/yum update -y /tmp/"{{ plexrpm }}"
-#  ignore_errors: True
-  #yum:
-  #  name: /tmp/"{{ plexrpm }}"
-  #  state: latest
-
-#- name: "update: Delete plexrpm file"
-#  file:
-#    state: absent
-#    path: "/tmp/{{ plexrpm }}"
 
 - name: "update: upgrade all packages"
   yum:
@@ -34,16 +17,9 @@
   register: reboot_hint
 
 - name: "update: Rebooting ..."
-#  command: shutdown -r now "Reboot required for updated kernel"
-#  ignore_errors: true
   reboot:
   when: reboot_hint.stdout.find("reboot") != -1
   register: rebooting
-
-#- name: "exit playbook, system is rebooting"
-#  fail:
-#    msg: "system is rebooting"
-#  when: reboot_hint.stdout.find("reboot") != -1
 
 - name: "update: Start service plexmediaserver, if not running"
   service:
