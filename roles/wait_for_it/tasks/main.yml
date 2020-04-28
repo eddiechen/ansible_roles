@@ -6,7 +6,7 @@
 #      timeout: 180
 #      delay: 120
 
-- name: sleep for {{ seconds }} seconds and continue with play
+- name: sleep for 40 seconds and continue with play
   wait_for:
     #timeout: "{{ seconds }}"
-    timeout: 35
+    timeout: 40
