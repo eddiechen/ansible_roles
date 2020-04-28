@@ -1,0 +1,22 @@
+---
+- name: installing apache RPMs
+  yum:
+    name: httpd
+    state: latest
+
+- name: enabling firewalld for http
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: Copying index test page
+  template:
+    src: "templates/index.html.j2"
+    dest: "/var/www/index.html"
+
+- name: enabling apache service
+  service:
+    name: httpd
+    state: started
+    enabled: yes

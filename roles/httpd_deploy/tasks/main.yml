@@ -1,2 +1,11 @@
 ---
 # tasks file for httpd_deploy
+- name: Cannot run without tags
+  fail:
+    msg: "You must run this playbook with tags!"
+
+- import_tasks: httpd_install.yml
+  tags: install
+
+- import_tasks: httpd_remove.yml
+  tags: remove

@@ -1,0 +1,22 @@
+---
+- name: Remove webpage index.html file
+  file:
+    path: /var/www/index.html
+    state: absent
+
+- name: disabling apache service
+  service:
+    name: httpd
+    state: stopped
+    enabled: no
+
+- name: disabling firewalld for http
+  firewalld:
+    service: http
+    permanent: yes
+    state: disabled
+
+- name: installing apache RPMs
+  yum:
+    name: httpd
+    state: absent
