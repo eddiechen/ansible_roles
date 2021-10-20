@@ -8,7 +8,7 @@
   fail:
     msg: "{{ myvol }} does not exist"
   with_items: ansible_mounts
-  when: item.mount == '{{ myvol }}'
+  when: item.mount != '{{ myvol }}'
 
 - name: "rsync: volume is presented"
   synchronize:
@@ -17,4 +17,4 @@
     archive: yes
     delete: yes
   delegate_to: "{{ inventory_hostname }}"
-  when: plex_vol.stat.isdir is defined
+  when: item.mount == '{{ myvol }}'
