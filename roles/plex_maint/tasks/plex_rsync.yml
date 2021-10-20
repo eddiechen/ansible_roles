@@ -1,9 +1,4 @@
 ---
-#- name: check for backup directory
-#  stat:
-#    path: "{{ myvol }}"
-#  register: plex_vol
-
 - name: check for backup directory
   command: mountpoint -q {{ myvol }}
   register: volume_stat
