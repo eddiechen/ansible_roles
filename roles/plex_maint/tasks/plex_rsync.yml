@@ -4,11 +4,16 @@
 #    path: "{{ myvol }}"
 #  register: plex_vol
 
+- name: check for backup directory
+  command: mountpoint -q {{ myvol }}
+  register: volume_stat
+  failed_when: False
+  changed_when: False
+
 - name: "rsync: check and make sure plex backup volume is mounted"
   fail:
     msg: "{{ myvol }} does not exist"
-  with_items: ansible_mounts
-  when: item.mount != '/backup'
+  when: volume_stat.rc != 0
 
 - name: "rsync: volume is presented"
   synchronize:
@@ -17,4 +22,4 @@
     archive: yes
     delete: yes
   delegate_to: "{{ inventory_hostname }}"
-  when: item.mount == '/backup'
+  when: volume_stat.rc == 0
