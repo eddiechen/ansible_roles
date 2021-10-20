@@ -12,7 +12,7 @@
 
 - name: "rsync: check and make sure plex backup volume is mounted"
   fail:
-    msg: "{{ myvol }} does not exist"
+    msg: "{{ myvol }} is not mounted"
   when: volume_stat.rc != 0
 
 - name: "rsync: volume is presented"
